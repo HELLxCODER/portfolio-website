@@ -18,6 +18,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -38,8 +39,11 @@
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
-                <p>I'm a Mechanical Engineering student at Bangalore Institute of Technology with a passion for aerospace engineering and scientific programming.</p>
-                <p>Currently learning Python for data analysis and visualization using NumPy, SymPy, and Pandas. I enjoy solving complex engineering problems through code.</p>
+               <p>I'm Pranav Vasisth, a first-year <strong>Mechanical Engineering</strong> student at <strong>Bangalore Institute of Technology</strong>. I'm passionate about aerospace engineering and aspire to pursue my Master's degree in this field.</p>
+            
+               <p>Currently, I'm building a strong foundation in scientific programming with Python, exploring libraries like NumPy, Pandas, and SymPy for data analysis and computational problem-solving. I believe that combining mechanical engineering principles with programming skills will help me contribute to innovative aerospace solutions.</p>
+            
+               <p>As I progress through my degree, I'm actively working on projects that bridge engineering concepts with practical coding applications. This portfolio serves as a space to document my learning journey and showcase the projects I build along the way.</p>
             </div>
         </div>
     </section>
@@ -70,15 +74,50 @@
                 <p>Symbolic mathematics</p>
             </div>
             <div class="skill-card">
-                <i class="bi bi-globe skill-icon"></i>
-                <h3>Django</h3>
-                <p>Web development</p>
-            </div>
-            <div class="skill-card">
                 <i class="bi bi-gear skill-icon"></i>
                 <h3>Mechanical Engineering</h3>
                 <p>Core engineering principles</p>
             </div>
+            <div class="skill-card">
+                <i class="bi bi-graph-up skill-icon"></i>
+                <h3>Matplotlib</h3>
+                <p>Data visualization and plotting</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Certifications Section -->
+<section id="certifications" class="certifications">
+    <div class="container">
+        <h2 class="section-title">Certifications</h2>
+        <div class="certifications-grid">
+            {% if certifications %}
+                {% for cert in certifications %}
+                <div class="cert-card">
+                    {% if cert.certificate_image %}
+                    <div class="cert-image">
+                        <img src="{{ cert.certificate_image.url }}" alt="{{ cert.title }}">
+                    </div>
+                    {% endif %}
+                    <div class="cert-content">
+                        <div class="cert-header">
+                            <i class="bi bi-award cert-icon"></i>
+                            <h3>{{ cert.title }}</h3>
+                        </div>
+                        <p class="cert-issuer"><strong>Issued by:</strong> {{ cert.issuer }}</p>
+                        <p class="cert-date"><strong>Date:</strong> {{ cert.date_obtained|date:"F Y" }}</p>
+                        <p class="cert-description">{{ cert.description }}</p>
+                        {% if cert.certificate_url %}
+                        <a href="{{ cert.certificate_url }}" target="_blank" class="cert-link">
+                            <i class="bi bi-link-45deg"></i> View Certificate
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p style="text-align: center; color: #8892b0;">No certifications yet. Add some in the admin panel!</p>
+            {% endif %}
         </div>
     </div>
 </section>
