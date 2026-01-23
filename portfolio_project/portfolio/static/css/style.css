@@ -657,4 +657,119 @@ footer {
     .cert-image {
         height: 200px;
     }
+    /* Resume Section */
+.resume {
+    background-color: rgba(15, 32, 51, 0.5);
+    border-top: 2px solid #2980b9;
+    border-bottom: 2px solid #2980b9;
+}
+
+.resume-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resume-card {
+    background-color: rgba(15, 32, 51, 0.8);
+    padding: 60px;
+    border: 2px solid #2980b9;
+    text-align: center;
+    max-width: 600px;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.resume-card::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border: 1px dashed rgba(52, 152, 219, 0.3);
+    pointer-events: none;
+}
+
+.resume-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(52, 152, 219, 0.4);
+}
+
+.resume-icon {
+    font-size: 5rem;
+    color: #3498db;
+    margin-bottom: 30px;
+    display: block;
+    filter: drop-shadow(0 0 20px rgba(52, 152, 219, 0.6));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.resume-card h3 {
+    color: #e0e1dd;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.resume-card p {
+    color: #a8b2d1;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+.download-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 45px;
+    background-color: transparent;
+    color: #3498db;
+    border: 2px solid #3498db;
+    text-decoration: none;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.download-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(52, 152, 219, 0.3) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.download-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.download-button:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+    box-shadow: 0 0 25px rgba(52, 152, 219, 0.6);
+    transform: translateY(-3px);
+}
+
+.download-button i {
+    font-size: 1.4rem;
+}
 }
