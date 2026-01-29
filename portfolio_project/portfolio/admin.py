@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, Certification
+from .models import ContactMessage, Project, Certification, Skill
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
@@ -14,3 +14,22 @@ class CertificationAdmin(admin.ModelAdmin):
     list_filter = ('issuer', 'date_obtained')
     search_fields = ('title', 'issuer', 'description')
     ordering = ('-date_obtained',)
+
+
+@admin.register(ContactMessage)
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'subject', 'created_at', 'is_read')
+    list_filter = ('is_read', 'created_at')
+    search_fields = ('name', 'email', 'subject', 'message')
+    ordering = ('-created_at',)
+    readonly_fields = ('name', 'email', 'subject', 'message', 'created_at')
+    
+    def has_add_permission(self, request):
+        return False  # Don't allow adding messages from admin
+    
+
+@admin.register(Skill)
+class SkillAdmin(admin.ModelAdmin):
+    list_display = ('name', 'proficiency', 'order')
+    list_editable = ('proficiency', 'order')
+    ordering = ('order', 'name')

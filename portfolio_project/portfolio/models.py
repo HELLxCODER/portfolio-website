@@ -31,3 +31,32 @@ class Certification(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.issuer}"
+
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=300)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"Message from {self.name} - {self.subject}"
+    
+
+class Skill(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=200, blank=True)
+    proficiency = models.IntegerField(help_text="Skill level from 0 to 100")
+    icon_class = models.CharField(max_length=100, help_text="Bootstrap icon class (e.g., bi-code-slash)")
+    order = models.IntegerField(default=0, help_text="Display order (lower numbers appear first)")
+    
+    class Meta:
+        ordering = ['order', 'name']
+    
+    def __str__(self):
+        return f"{self.name} - {self.proficiency}%"

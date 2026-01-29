@@ -43,3 +43,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+// Animate progress bars when they come into view
+const observerOptions = {
+    threshold: 0.5,
+    rootMargin: '0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const progressBars = entry.target.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const progress = bar.getAttribute('data-progress');
+                setTimeout(() => {
+                    bar.style.width = progress + '%';
+                    bar.classList.add('filled');
+                }, 100);
+            });
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+// Observe skills section
+const skillsSection = document.querySelector('#skills');
+if (skillsSection) {
+    observer.observe(skillsSection);
+}

@@ -53,37 +53,28 @@
 <section id="skills" class="skills">
     <div class="container">
         <h2 class="section-title">Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <i class="bi bi-code-slash skill-icon"></i>
-                <h3>Python</h3>
-                <p>Scientific programming and automation</p>
-            </div>
-            <div class="skill-card">
-                <i class="bi bi-calculator skill-icon"></i>
-                <h3>NumPy</h3>
-                <p>Numerical computing and arrays</p>
-            </div>
-            <div class="skill-card">
-                <i class="bi bi-table skill-icon"></i>
-                <h3>Pandas</h3>
-                <p>Data analysis and manipulation</p>
-            </div>
-            <div class="skill-card">
-                <i class="bi bi-infinity skill-icon"></i>
-                <h3>SymPy</h3>
-                <p>Symbolic mathematics</p>
-            </div>
-            <div class="skill-card">
-                <i class="bi bi-gear skill-icon"></i>
-                <h3>Mechanical Engineering</h3>
-                <p>Core engineering principles</p>
-            </div>
-            <div class="skill-card">
-                <i class="bi bi-graph-up skill-icon"></i>
-                <h3>Matplotlib</h3>
-                <p>Data visualization and plotting</p>
-            </div>
+        <div class="skills-container">
+            {% if skills %}
+                {% for skill in skills %}
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <div class="skill-name-group">
+                            <i class="bi {{ skill.icon_class }} skill-icon-small"></i>
+                            <span class="skill-name">{{ skill.name }}</span>
+                        </div>
+                        <span class="skill-percentage">{{ skill.proficiency }}%</span>
+                    </div>
+                    {% if skill.description %}
+                        <p class="skill-description">{{ skill.description }}</p>
+                    {% endif %}
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" data-progress="{{ skill.proficiency }}"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p style="text-align: center; color: #8892b0;">No skills added yet. Add your skills in the admin panel!</p>
+            {% endif %}
         </div>
     </div>
 </section>
@@ -183,21 +174,74 @@
     </div>
 </section>
 
- <!-- Contact Section -->
+<!-- Contact Section -->
 <section id="contact" class="contact">
     <div class="container">
         <h2 class="section-title">Get In Touch</h2>
-        <p class="contact-description">Feel free to reach out for collaborations or opportunities</p>
-        <div class="contact-links">
-            <a href="mailto:pranavvasisth10@gmail.com" class="contact-button">
-                <i class="bi bi-envelope-fill"></i> Email Me
-            </a>
-            <a href="https://github.com/HELLxCODER" class="contact-button">
-                <i class="bi bi-github"></i> GitHub
-            </a>
-            <a href="https://linkedin.com/in/pranav-vasisth/" class="contact-button">
-                <i class="bi bi-linkedin"></i> LinkedIn
-            </a>
+        <p class="contact-description">Have a question or want to work together? Send me a message!</p>
+        
+        <!-- Display Django messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="form-message {% if message.tags %}{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        <form method="POST" action="{% url 'home' %}#contact" class="contact-form">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ contact_form.name.id_for_label }}">Name</label>
+                {{ contact_form.name }}
+                {% if contact_form.name.errors %}
+                    <span class="error-message">{{ contact_form.name.errors.0 }}</span>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ contact_form.email.id_for_label }}">Email</label>
+                {{ contact_form.email }}
+                {% if contact_form.email.errors %}
+                    <span class="error-message">{{ contact_form.email.errors.0 }}</span>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ contact_form.subject.id_for_label }}">Subject</label>
+                {{ contact_form.subject }}
+                {% if contact_form.subject.errors %}
+                    <span class="error-message">{{ contact_form.subject.errors.0 }}</span>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ contact_form.message.id_for_label }}">Message</label>
+                {{ contact_form.message }}
+                {% if contact_form.message.errors %}
+                    <span class="error-message">{{ contact_form.message.errors.0 }}</span>
+                {% endif %}
+            </div>
+            
+            <button type="submit" class="submit-button">
+                <i class="bi bi-send"></i> Send Message
+            </button>
+        </form>
+        
+        <div class="social-links">
+            <p>Or connect with me on:</p>
+            <div class="contact-links">
+                <a href="https://github.com/HELLxCODER" target="_blank" class="social-button">
+                    <i class="bi bi-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/pranavvasisth" target="_blank" class="social-button">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+                <a href="mailto:pranavvasisth10@gmail.com" class="social-button">
+                    <i class="bi bi-envelope-fill"></i>
+                </a>
+            </div>
         </div>
     </div>
 </section>
