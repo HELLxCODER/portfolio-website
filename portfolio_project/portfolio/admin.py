@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ContactMessage, Project, Certification, Skill
+from .models import ContactMessage, Project, Certification, Skill, Education
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
@@ -33,3 +33,10 @@ class SkillAdmin(admin.ModelAdmin):
     list_display = ('name', 'proficiency', 'order')
     list_editable = ('proficiency', 'order')
     ordering = ('order', 'name')
+
+@admin.register(Education)
+class EducationAdmin(admin.ModelAdmin):
+    list_display = ('institution', 'degree', 'start_date', 'end_date', 'order')
+    list_editable = ('order',)
+    list_filter = ('start_date',)
+    ordering = ('order', '-start_date')

@@ -60,3 +60,24 @@ class Skill(models.Model):
     
     def __str__(self):
         return f"{self.name} - {self.proficiency}%"
+    
+class Education(models.Model):
+    institution = models.CharField(max_length=200)
+    degree = models.CharField(max_length=100)
+    field_of_study = models.CharField(max_length=100, blank=True)
+    start_date = models.DateField()
+    end_date = models.DateField(blank=True, help_text="Leave blank if ongoing")
+    description = models.TextField(blank=True)
+    grade = models.CharField(max_length=50, blank=True, help_text="GPA or Percentage")
+    order = models.IntegerField(default=0, help_text="Display order (lower numbers appear first)")
+
+    class Meta:
+        ordering = ['-start_date']
+        verbose_name_plural = "Education"
+
+    def __str__(self):
+        return f"{self.degree} at {self.institution}"
+    
+    @property
+    def is_ongoing(self):
+        return self.end_date is None

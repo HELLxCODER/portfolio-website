@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Project, Certification, Skill, ContactMessage
+from .models import Project, Certification, Skill, ContactMessage, Education
 from .forms import ContactForm
 
 def home(requests):
     projects = Project.objects.all()
     certifications = Certification.objects.all()
     skills = Skill.objects.all()
+    education = Education.objects.all()
     contact_form = ContactForm()
     
     if requests.method == 'POST':
@@ -22,6 +23,7 @@ def home(requests):
         'projects': projects,
         'certifications': certifications,
         'skills': skills,
+        'education': education,
         'contact_form': contact_form,
     }
     return render(requests, 'portfolio/home.html', context)

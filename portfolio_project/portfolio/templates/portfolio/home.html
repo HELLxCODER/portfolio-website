@@ -36,19 +36,117 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-               <p>I'm Pranav Vasisth, a first-year <strong>Mechanical Engineering</strong> student at <strong>Bangalore Institute of Technology</strong>. I'm passionate about aerospace engineering and aspire to pursue my Master's degree in this field.</p>
+<!-- About Section -->
+<section id="about" class="about">
+    <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid">
+            <!-- Left Side - About Text -->
+            <div class="about-text">
+                <div class="about-card">
+                    <div class="card-corner top-left"></div>
+                    <div class="card-corner top-right"></div>
+                    <div class="card-corner bottom-left"></div>
+                    <div class="card-corner bottom-right"></div>
+                    
+                    <div class="profile-header">
+                        <div class="profile-icon">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h3>Pranav Vasisth</h3>
+                            <p class="profile-title">Mechanical Engineering Student</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-divider"></div>
+                    
+                    <div class="about-description">
+                        <p>I'm a first-year <strong>Mechanical Engineering</strong> student at <strong>Bangalore Institute of Technology</strong>. I'm passionate about aerospace engineering and aspire to pursue my Master's degree in this field.</p>
+                        
+                        <p>Currently, I'm building a strong foundation in scientific programming with Python, exploring libraries like NumPy, Pandas, and SymPy for data analysis and computational problem-solving.</p>
+                        
+                        <p>I believe that combining mechanical engineering principles with programming skills will help me contribute to innovative aerospace solutions.</p>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <i class="bi bi-code-square"></i>
+                            <div class="stat-content">
+                                <span class="stat-number">{{ skills.count }}+</span>
+                                <span class="stat-label">Technical Skills</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="bi bi-folder"></i>
+                            <div class="stat-content">
+                                <span class="stat-number">{{ projects.count }}+</span>
+                                <span class="stat-label">Projects</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="bi bi-award"></i>
+                            <div class="stat-content">
+                                <span class="stat-number">{{ certifications.count }}+</span>
+                                <span class="stat-label">Certifications</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-               <p>Currently, I'm building a strong foundation in scientific programming with Python, exploring libraries like NumPy, Pandas, and SymPy for data analysis and computational problem-solving. I believe that combining mechanical engineering principles with programming skills will help me contribute to innovative aerospace solutions.</p>
-            
-               <p>As I progress through my degree, I'm actively working on projects that bridge engineering concepts with practical coding applications. This portfolio serves as a space to document my learning journey and showcase the projects I build along the way.</p>
+            <!-- Right Side - Education Timeline -->
+            <div class="education-timeline">
+                <div class="timeline-header">
+                    <i class="bi bi-mortarboard-fill"></i>
+                    <h3>Education Journey</h3>
+                </div>
+                
+                {% if education %}
+                    <div class="timeline">
+                        {% for edu in education %}
+                        <div class="timeline-item {% if edu.is_current %}current{% endif %}">
+                            <div class="timeline-marker">
+                                <div class="marker-ring"></div>
+                                <div class="marker-dot"></div>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">
+                                    {{ edu.start_date|date:"Y" }} - 
+                                    {% if edu.is_current %}
+                                        <span class="current-badge">Present</span>
+                                    {% else %}
+                                        {{ edu.end_date|date:"Y" }}
+                                    {% endif %}
+                                </div>
+                                <h4>{{ edu.degree }}</h4>
+                                {% if edu.field_of_study %}
+                                    <p class="field-of-study">{{ edu.field_of_study }}</p>
+                                {% endif %}
+                                <p class="institution">
+                                    <i class="bi bi-building"></i>
+                                    {{ edu.institution }}
+                                </p>
+                                {% if edu.grade %}
+                                    <p class="grade">
+                                        <i class="bi bi-star-fill"></i>
+                                        {{ edu.grade }}
+                                    </p>
+                                {% endif %}
+                                {% if edu.description %}
+                                    <p class="edu-description">{{ edu.description }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="no-education">Add your education in the admin panel!</p>
+                {% endif %}
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 <!-- Skills Section -->
 <section id="skills" class="skills">
